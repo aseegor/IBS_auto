@@ -28,7 +28,7 @@ public class TestPropManager {
         try {
             properties.load(new FileInputStream(
                     new File("src/main/resources/" +
-                            System.getProperty("propFile", "application") + ".properties")));
+                            System.getProperty("propFile", "environment") + ".properties")));
         } catch (IOException e) {
             e.printStackTrace();
         }
