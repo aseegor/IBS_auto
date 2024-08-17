@@ -1,5 +1,6 @@
 package org.asegorov.framework.pages;
 
+import io.qameta.allure.Step;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -41,21 +42,21 @@ public class BusinessTripsPage extends BasePage {
     @FindBy(xpath = "//html")
     private WebElement root;
 
-
+    @Step("Нажимает 'Создать командировку'")
     public BusinessTripsPage createBusinessTrip() {
         createBusinessTripButton.click();
         this.loading();
         waitUtilElementToBeVisible(businessTripHeader);
         return this;
     }
-
+    @Step("Заполняет подразделение")
     public BusinessTripsPage fillBusinessUnit(String value) {
         Select select = new Select(businessUnitDropdpwn);
         select.selectByVisibleText(value);
         Assert.assertEquals(value, select.getFirstSelectedOption().getText());
         return this;
     }
-
+    @Step("Заполняет поле 'Принимающая организация значением '{value}'")
     public BusinessTripsPage fillOrganisation(String value) {
         hostOrganisationsListButton.click();
         hostOrganisationsListDropdown.click();
@@ -66,7 +67,7 @@ public class BusinessTripsPage extends BasePage {
         Assert.assertEquals(value, hostOrganisationInputField.getAttribute("value"));
         return this;
     }
-
+    @Step("Заполняет чекбокс '{name}'")
     public BusinessTripsPage selectCheckBox(String name) {
         WebElement checkBox = tasksCheckBoxesBlock.findElement(By.xpath("./descendant::label[contains(text(), '"+ name +"')]/preceding-sibling::input"));
         if (!checkBox.isSelected()) {
@@ -76,6 +77,7 @@ public class BusinessTripsPage extends BasePage {
         return this;
     }
 
+    @Step("Заполняет город выбытия и прибытия")
     public BusinessTripsPage fillDepartureAndArrivalCity(String departureCity, String arrivalCity) {
         clearInputField(departureCityField);
         fillInputField(departureCityField, departureCity);
@@ -85,7 +87,7 @@ public class BusinessTripsPage extends BasePage {
         Assert.assertEquals(arrivalCity, arrivalCityField.getAttribute("value"));
         return this;
     }
-
+    @Step("Заполняет дату выезда и возвращения")
     public BusinessTripsPage fillDepartureAndArrivalDate(String departureDate, String arrivalDate) {
         fillDateField(departureDateField, departureDate);
         fillDateField(arrivalDateField, arrivalDate);
@@ -93,12 +95,13 @@ public class BusinessTripsPage extends BasePage {
         Assert.assertEquals(arrivalDate, arrivalDateField.getAttribute("value"));
         return this;
     }
+    @Step("Нажимает 'Сохранить и закрыть'")
     public BusinessTripsPage saveAndClose() {
         saveAndCloseButton.click();
         return this;
     }
 
-
+    @Step("Проверяет наличие сообщения об ошибке")
     public BusinessTripsPage checkErrorMessageAtField(String nameField, String errMessage) {
         WebElement element = root.findElement(By.xpath("//span[contains(text(), '" + nameField + "')]/ancestor::div[@class = 'responsive-cell responsive-cell-no-blocks']//descendant::span[contains(text(), '" + errMessage + "')]"));
         Assert.assertTrue(element.isDisplayed());

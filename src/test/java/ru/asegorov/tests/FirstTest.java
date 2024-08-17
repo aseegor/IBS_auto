@@ -6,7 +6,7 @@ import ru.asegorov.basetestclass.BaseTests;
 public class FirstTest extends BaseTests {
 
     @Test
-    public void test() throws InterruptedException {
+    public void test() {
         trainingAppline.getLoginPage()
                 .enterUsernameAndPassword()
                 .submitClick()

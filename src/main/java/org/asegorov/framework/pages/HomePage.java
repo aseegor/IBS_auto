@@ -1,5 +1,6 @@
 package org.asegorov.framework.pages;
 
+import io.qameta.allure.Step;
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -14,7 +15,7 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//li[contains(@class, 'dropdown')]/descendant::span[@class = 'title']")
     private List<WebElement> listBaseMenu;
 
-
+    @Step("Нажимает пункт меню с названием '{nameBaseMenu}'")
     public HomePage selectBaseMenu(String nameBaseMenu) {
         for (WebElement menuItem : listBaseMenu) {
             if (menuItem.getText().trim().equalsIgnoreCase(nameBaseMenu)) {
@@ -25,7 +26,7 @@ public class HomePage extends BasePage {
         Assert.fail("Меню '" + nameBaseMenu + "' не было найдено на стартовой странице!");
         return this;
     }
-
+    @Step("Проверяет, что основная страница загрузилась")
     public HomePage checkOpenHomePage() {
         Assert.assertTrue(header.isDisplayed());
         return this;
