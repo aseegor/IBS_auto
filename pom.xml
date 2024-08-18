@@ -15,7 +15,7 @@
         <file.encoding>${encoding.type}</file.encoding>
 
         <!-- Java version -->
-        <java.version>19</java.version>
+        <java.version>11</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
@@ -24,6 +24,7 @@
         <junit.version>4.13.1</junit.version>
         <allure-junit4>2.22.2</allure-junit4>
         <aspectj.version>1.9.7</aspectj.version>
+        <slf4j.version>2.0.13</slf4j.version>
     </properties>
 
     <dependencies>
@@ -48,7 +49,16 @@
             <artifactId>allure-junit4</artifactId>
             <version>${allure-junit4}</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -86,7 +96,7 @@
                     <properties>
                         <property>
                             <name>listener</name>
-                            <value>io.qameta.allure.junit4.AllureJunit4</value>
+                            <value>org.asegorov.framework.utils.MyAllureListener</value>
                         </property>
                     </properties>
                 </configuration>

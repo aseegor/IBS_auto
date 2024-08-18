@@ -1,11 +1,13 @@
 package ru.asegorov.tests;
 
+import io.qameta.allure.junit4.DisplayName;
 import org.junit.Test;
 import ru.asegorov.basetestclass.BaseTests;
 
 public class FirstTest extends BaseTests {
 
     @Test
+    @DisplayName("Создание командировки. Списки сотруднков обязательны для заполнения ")
     public void test() {
         trainingAppline.getLoginPage()
                 .enterUsernameAndPassword()
@@ -26,6 +28,6 @@ public class FirstTest extends BaseTests {
                 .saveAndClose()
                 .loading()
                 .checkErrorMessageAtField("Командированные сотрудники", "Список командируемых сотрудников не может быть пустым")
-                .checkErrorMessageAtField("Внештатные сотрудники", "Список командируемых сотрудников не может быть пустым");
+                .checkErrorMessageAtField("Внештаsтные сотрудники", "Список командируемых сотрудников не может быть пустым");
     }
 }

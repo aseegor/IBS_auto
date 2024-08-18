@@ -104,7 +104,7 @@ public class BusinessTripsPage extends BasePage {
     @Step("Проверяет наличие сообщения об ошибке")
     public BusinessTripsPage checkErrorMessageAtField(String nameField, String errMessage) {
         WebElement element = root.findElement(By.xpath("//span[contains(text(), '" + nameField + "')]/ancestor::div[@class = 'responsive-cell responsive-cell-no-blocks']//descendant::span[contains(text(), '" + errMessage + "')]"));
-        Assert.assertTrue(element.isDisplayed());
+        Assert.assertTrue("Элемент не отображается на странице", element.isDisplayed());
         return this;
     }
 }
