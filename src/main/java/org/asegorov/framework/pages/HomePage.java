@@ -1,21 +1,22 @@
 package org.asegorov.framework.pages;
 
-import io.qameta.allure.Step;
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
 
 public class HomePage extends BasePage {
-
+    @FindBy(xpath = "//div[@class='loader-mask shown']")
+    private WebElement loader;
     @FindBy(xpath = "//h1[text() = 'Панель быстрого запуска']")
     private WebElement header;
     @FindBy(xpath = "//li[contains(@class, 'dropdown')]/descendant::span[@class = 'title']")
     private List<WebElement> listBaseMenu;
 
-    @Step("Нажимает пункт меню с названием '{nameBaseMenu}'")
+
     public HomePage selectBaseMenu(String nameBaseMenu) {
         for (WebElement menuItem : listBaseMenu) {
             if (menuItem.getText().trim().equalsIgnoreCase(nameBaseMenu)) {
@@ -26,10 +27,14 @@ public class HomePage extends BasePage {
         Assert.fail("Меню '" + nameBaseMenu + "' не было найдено на стартовой странице!");
         return this;
     }
-    @Step("Проверяет, что основная страница загрузилась")
+
     public HomePage checkOpenHomePage() {
         Assert.assertTrue(header.isDisplayed());
         return this;
     }
 
+    public BusinessTripsPage loading() {
+        wait.until(ExpectedConditions.invisibilityOf(loader));
+        return pageManager.getBusinessTripsPage();
+    }
 }

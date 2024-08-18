@@ -1,12 +1,12 @@
 package org.asegorov.framework.pages;
 
-import io.qameta.allure.Step;
 import org.asegorov.framework.managers.TestPropManager;
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import static org.asegorov.framework.utils.PropConst.*;
+import static org.asegorov.framework.utils.PropConst.PASSWORD;
+import static org.asegorov.framework.utils.PropConst.USERNAME;
 
 
 public class LoginPage extends BasePage {
@@ -22,19 +22,25 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//button[@type='submit']")
     private WebElement submitButton;
 
-    @Step("Проверяет, что страница авторизации загрузилась")
+
     public LoginPage checkOpenLoginPage() {
         Assert.assertTrue(loginForm.isDisplayed());
         return this;
     }
-@Step("Вводит логин и пароль")
+
     public LoginPage enterUsernameAndPassword(){
         checkOpenLoginPage();
         usernameField.sendKeys(TestPropManager.getTestPropManager().getProperty(USERNAME));
         passwordField.sendKeys(TestPropManager.getTestPropManager().getProperty(PASSWORD));
         return pageManager.getLoginPage();
     }
-    @Step("Нажимает кнопку 'Войти'")
+    public LoginPage enterUsernameAndPassword(String username, String password){
+        checkOpenLoginPage();
+        usernameField.sendKeys(username);
+        passwordField.sendKeys(password);
+        return pageManager.getLoginPage();
+    }
+
     public HomePage submitClick() {
         submitButton.click();
         return pageManager.getHomePage().checkOpenHomePage();

@@ -1,6 +1,7 @@
 package org.asegorov.framework.managers;
 
 
+import org.asegorov.framework.pages.BasePage;
 import org.asegorov.framework.pages.BusinessTripsPage;
 import org.asegorov.framework.pages.HomePage;
 import org.asegorov.framework.pages.LoginPage;
@@ -8,7 +9,6 @@ import org.asegorov.framework.pages.LoginPage;
 public class PageManager {
 
     private static PageManager pageManager;
-
     private LoginPage loginPage;
     private HomePage homePage;
     private BusinessTripsPage businessTripsPage;
