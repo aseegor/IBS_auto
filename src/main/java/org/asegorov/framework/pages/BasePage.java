@@ -27,7 +27,7 @@ public class BasePage {
 
     protected JavascriptExecutor js = (JavascriptExecutor) driverManager.getDriver();
 
-    protected WebDriverWait wait = new WebDriverWait(driverManager.getDriver(), Duration.ofSeconds(15), Duration.ofMillis(2000));
+    protected WebDriverWait wait = new WebDriverWait(driverManager.getDriver(), Duration.ofSeconds(15), Duration.ofMillis(1000));
 
     private final TestPropManager props = TestPropManager.getTestPropManager();
 
@@ -40,12 +40,11 @@ public class BasePage {
         return element;
     }
 
-    public void waitUntilDocumentToBeLoadedJs() {
-        while (!js.executeScript("return document.readyState;").toString().equals("complete")) {
-            System.out.println(js.executeScript("return document.readyState;").toString().equals("complete"));
-        }
-        System.out.println(js.executeScript("return document.readyState;").toString().equals("complete"));
-    }
+//    public void waitUntilDocumentToBeLoadedJs() {
+//        while (!js.executeScript("return document.readyState;").toString().equals("complete")) {
+//            if(js.executeScript("return document.readyState;").toString().equals("complete")) break;
+//        }
+//    }
 
     public WebElement scrollWithOffset(WebElement element, int x, int y) {
         String code = "window.scroll(" + (element.getLocation().x + x) + ","

@@ -3,6 +3,7 @@ package org.asegorov.framework.pages;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -15,6 +16,8 @@ public class MainPage extends BasePage {
     private WebElement root;
     @FindBy(xpath = "//a[contains(@class, 'Header_logo')]")
     private WebElement headerLogo;
+    @FindBy(xpath = "//div[contains(@class, 'ListingFilters_loading')]")
+    private WebElement loader;
     @FindBy(xpath = "//input[@id = 'searchInput']")
     private WebElement mainSearchInput;
 
@@ -102,28 +105,20 @@ public class MainPage extends BasePage {
         return this;
     }
 
-    //    public MainPage elementsOnPageCountAssert() {
-//        Assert.assertEquals("Количество элементов не совпадает с ожидаемым значением",
-//                Integer.parseInt(itemsOnPageCount.getText().replaceAll("по ", "")), itemsOnPageList.size());
-//        return this;
-//    }
-    public MainPage elementsOnPageCountAssert(Integer count) throws InterruptedException {
-            waitUtilElementToBeInVisible(searchIndicatorSkeleton.get(0));
-            waitUtilElementToBeClickable(itemsOnPageList.get(0));
-            Assert.assertTrue("Количество элементов не совпадает с ожидаемым значением",
-                    count == itemsOnPageList.size());
+    public MainPage elementsOnPageCountAssert(Integer count) {
+        Assert.assertTrue("Количество элементов не совпадает с ожидаемым значением",
+                count == itemsOnPageList.size());
         return this;
     }
 
     public MainPage saveFirstElementTitle() throws InterruptedException {
         waitUtilSearchEnds();
-        Thread.sleep(5000);
         this.titleOfElement = itemsTitlesList.get(0).getText();
         return this;
     }
 
-    public MainPage checkSearchResultName() throws InterruptedException {
-//        Thread.sleep(5000);
+    public MainPage checkSearchResultName() {
+        waitUtilSearchEnds();
         Assert.assertTrue("Название элемента не соответствует заданному", this.titleOfElement.equals(itemsTitlesList.get(0).getText()));
         return this;
     }
@@ -137,10 +132,13 @@ public class MainPage extends BasePage {
         return wait.until(ExpectedConditions.visibilityOf(element));
     }
 
-    public MainPage waitUtilSearchEnds() throws InterruptedException {
-        wait.until(ExpectedConditions.invisibilityOf(searchIndicatorSkeleton.get(0)));
-        waitUntilDocumentToBeLoadedJs();
-        waitUtilElementToBeClickable(itemsTitlesList.get(0));
+    public MainPage waitUtilSearchEnds() {
+        wait.until(ExpectedConditions.invisibilityOf(loader));
+        wait.until(ExpectedConditions.invisibilityOfAllElements(searchIndicatorSkeleton));
+        return this;
+    }
+    public MainPage waitUtilFilterWorks() {
+        wait.until(ExpectedConditions.invisibilityOfAllElements(searchIndicatorSkeleton));
         return this;
     }
 
@@ -149,10 +147,10 @@ public class MainPage extends BasePage {
         return this;
     }
 
-    public MainPage makeSearch() throws InterruptedException {
-        Thread.sleep(5000);
+    public MainPage makeSearch() {
         mainSearchInput.sendKeys(this.titleOfElement);
         mainSearchInput.sendKeys(Keys.ENTER);
+        waitUtilSearchEnds();
         return this;
     }
 

@@ -39,13 +39,13 @@ public class MainPageSteps {
         pageManager.getMainPage().selectManufacturer(manufacturer);
     }
 
-    @И("дожидается окончания поиска")
-    public void waitUtilSearchEnds() throws InterruptedException {
-        pageManager.getMainPage().waitUtilSearchEnds();
+    @И("дожидается окончания поиска с фильтрами")
+    public void waitUtilFilterWorks() {
+        pageManager.getMainPage().waitUtilFilterWorks();
     }
 
     @И("проверяет, что количество товаров в выдаче совпадает с со значением {int}")
-    public void elementsOnPageCountAssert(Integer count) throws InterruptedException {
+    public void elementsOnPageCountAssert(Integer count) {
         pageManager.getMainPage().elementsOnPageCountAssert(count);
     }
 
@@ -54,12 +54,12 @@ public class MainPageSteps {
         pageManager.getMainPage().saveFirstElementTitle();
     }
 
-    @И("выполняет поиск по значению")
+    @И("выполняет поиск по сохраненному значению")
     public void makeSearch() throws InterruptedException {
         pageManager.getMainPage().makeSearch();
     }
     @И("проверяет название элемента в результатах выдачи")
-    public void checkSearchResultName() throws InterruptedException {
+    public void checkSearchResultName() {
         pageManager.getMainPage().checkSearchResultName();
     }
 
