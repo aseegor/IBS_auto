@@ -4,14 +4,17 @@ import org.asegorov.framework.managers.DriverManager;
 import org.asegorov.framework.managers.PageManager;
 import org.asegorov.framework.managers.TestPropManager;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.Objects;
+
+import static org.openqa.selenium.support.ui.ExpectedConditions.jsReturnsValue;
 
 
 public class BasePage {
@@ -37,6 +40,13 @@ public class BasePage {
         return element;
     }
 
+    public void waitUntilDocumentToBeLoadedJs() {
+        while (!js.executeScript("return document.readyState;").toString().equals("complete")) {
+            System.out.println(js.executeScript("return document.readyState;").toString().equals("complete"));
+        }
+        System.out.println(js.executeScript("return document.readyState;").toString().equals("complete"));
+    }
+
     public WebElement scrollWithOffset(WebElement element, int x, int y) {
         String code = "window.scroll(" + (element.getLocation().x + x) + ","
                 + (element.getLocation().y + y) + ");";
@@ -48,27 +58,5 @@ public class BasePage {
         return wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
-    protected WebElement waitUtilElementToBeVisible(WebElement element) {
-        return wait.until(ExpectedConditions.visibilityOf(element));
-    }
 
-    protected void fillInputField(WebElement field, String value) {
-        scrollToElementJs(field);
-        waitUtilElementToBeClickable(field).click();
-        field.sendKeys(value);
-    }
-
-    protected void clearInputField(WebElement field) {
-        scrollToElementJs(field);
-        waitUtilElementToBeClickable(field).click();
-        field.sendKeys(Keys.CONTROL + "a", Keys.DELETE);
-    }
-
-
-    protected void fillDateField(WebElement field, String value) {
-        scrollToElementJs(field);
-        field.sendKeys(value);
-        field.sendKeys(Keys.ESCAPE);
-
-    }
 }

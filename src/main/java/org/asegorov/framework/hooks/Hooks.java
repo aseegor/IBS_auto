@@ -34,6 +34,6 @@ public class Hooks {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        InitManager.quitFramework();
+//        InitManager.quitFramework();
     }
 }

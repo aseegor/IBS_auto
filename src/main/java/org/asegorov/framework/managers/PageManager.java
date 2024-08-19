@@ -1,17 +1,12 @@
 package org.asegorov.framework.managers;
 
 
-import org.asegorov.framework.pages.BasePage;
-import org.asegorov.framework.pages.BusinessTripsPage;
-import org.asegorov.framework.pages.HomePage;
-import org.asegorov.framework.pages.LoginPage;
+import org.asegorov.framework.pages.MainPage;
 
 public class PageManager {
 
     private static PageManager pageManager;
-    private LoginPage loginPage;
-    private HomePage homePage;
-    private BusinessTripsPage businessTripsPage;
+    private MainPage mainPage;
 
 
     private PageManager() {
@@ -24,23 +19,12 @@ public class PageManager {
         return pageManager;
     }
 
-    public LoginPage getLoginPage() {
-        if (loginPage == null) {
-            loginPage = new LoginPage();
+
+    public MainPage getMainPage() {
+        if (mainPage == null) {
+            mainPage = new MainPage();
         }
-        return loginPage;
+        return mainPage;
     }
 
-    public HomePage getHomePage() {
-        if (homePage == null) {
-            homePage = new HomePage();
-        }
-        return homePage;
-    }
-    public BusinessTripsPage getBusinessTripsPage() {
-        if (businessTripsPage == null) {
-            businessTripsPage = new BusinessTripsPage();
-        }
-        return businessTripsPage;
-    }
 }
