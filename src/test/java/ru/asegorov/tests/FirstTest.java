@@ -25,7 +25,6 @@ public class FirstTest {
     @Before
     public void before() {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
-        //   System.setProperty("webdriver.chrome.driver", "src/test/resources/yandexdriver.exe");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
         driver.get("http://training.appline.ru/ ");
@@ -33,7 +32,7 @@ public class FirstTest {
     }
 
     @Test
-    public void test() throws InterruptedException {
+    public void test() {
         // Авторизуется
         driver.findElement(By.xpath("//input[@name='_username']")).sendKeys(username);
         driver.findElement(By.xpath("//input[@name='_password']")).sendKeys(password);
@@ -86,23 +85,6 @@ public class FirstTest {
         // Проверяет наличие ошибки
         Assert.assertTrue(driver.findElement(By.xpath("//span[contains(text(), 'Командированные сотрудники')]/ancestor::div[@class = 'responsive-cell responsive-cell-no-blocks']//descendant::span[contains(text(), 'Список командируемых сотрудников не может быть пустым')]")).isDisplayed());
         Assert.assertTrue(driver.findElement(By.xpath("//span[contains(text(), 'Внештатные сотрудники')]/ancestor::div[@class = 'responsive-cell responsive-cell-no-blocks']//descendant::span[contains(text(), 'Список командируемых сотрудников не может быть пустым')]")).isDisplayed());
-
-
-
-//        driver.findElement(By.xpath("//div[@class='filter-item oro-drop']/div[contains(text(), 'Стадия')]")).click();
-//        wait.until(ExpectedConditions.visibilityOf(
-//                driver.findElement(By.xpath("//div[contains(@class, 'ui-multiselect-menu ui-corner-all')]"))));
-//        driver.findElement(By.xpath(
-//                        "//div[contains(@class, 'ui-multiselect-menu ui-corner-all')]//input[@type='search']"))
-//                .sendKeys("Согласование с ОСР");
-//        driver.findElement(By.xpath("//label[@title='Согласование с ОСР']")).click();
-//        loading();
-//        String id = driver.findElement(By.xpath("//td[text() = 'Кашира']/parent::tr/td[contains(@class, 'name')]")).getText();
-//        driver.findElement(By.xpath("//div[@class = 'filter-item oro-drop']/div[contains(text(), 'Номер')]")).click();
-//        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//input[@name = 'value']")))).sendKeys(id, Keys.ENTER);
-//        loading();
-
-        // to trip
     }
 
     public void loading() {
