@@ -28,6 +28,6 @@ public class FirstTest extends BaseTests {
                 .saveAndClose()
                 .loading()
                 .checkErrorMessageAtField("Командированные сотрудники", "Список командируемых сотрудников не может быть пустым")
-                .checkErrorMessageAtField("Внештаsтные сотрудники", "Список командируемых сотрудников не может быть пустым");
+                .checkErrorMessageAtField("Внештатные сотрудники", "Список командируемых сотрудников не может быть пустым");
     }
 }
